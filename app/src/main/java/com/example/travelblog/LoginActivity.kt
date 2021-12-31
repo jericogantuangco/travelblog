@@ -3,6 +3,7 @@ package com.example.travelblog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelblog.databinding.ActivityLoginBinding
@@ -34,9 +35,9 @@ class LoginActivity : AppCompatActivity() {
 
         if (username != "admin" || password != "admin") {
             showErrorDialog()
+        } else {
+            performLogin()
         }
-
-
     }
 
     private fun createTextWatcher(textInputLayout : TextInputLayout) : TextWatcher {
@@ -61,6 +62,13 @@ class LoginActivity : AppCompatActivity() {
             .setMessage("Username or Password is incorrect. Please try again.")
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
+    }
+
+    private fun performLogin(){
+        binding.loginButton.visibility = View.INVISIBLE
+        binding.progressBar.visibility = View.VISIBLE
+        binding.textUsernameLayout.isEnabled = false
+        binding.textPasswordInput.isEnabled = false
     }
 
 }
