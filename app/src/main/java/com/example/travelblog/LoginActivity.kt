@@ -1,6 +1,8 @@
 package com.example.travelblog
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -11,10 +13,19 @@ import com.google.android.material.textfield.TextInputLayout
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var preferences : BlogPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
+        preferences = BlogPreferences(this)
+
+        if ( preferences.isLoggedIn() ) {
+            startMainActivity()
+            finish()
+            return
+        }
+
         setContentView(binding.root)
         binding.loginButton.setOnClickListener { onLoginClicked() }
         binding.textUsernameLayout.editText?.addTextChangedListener(createTextWatcher(binding.textUsernameLayout))
@@ -64,11 +75,26 @@ class LoginActivity : AppCompatActivity() {
             .show()
     }
 
-    private fun performLogin(){
+    private fun performLogin() {
+        preferences.setLoggedIn(true)
+        preferences.iAmTest()
         binding.loginButton.visibility = View.INVISIBLE
         binding.progressBar.visibility = View.VISIBLE
         binding.textUsernameLayout.isEnabled = false
         binding.textPasswordInput.isEnabled = false
+
+        Handler().postDelayed(
+            {
+                startMainActivity()
+                finish()
+            },
+            2000
+        )
+    }
+
+    private fun startMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 }
