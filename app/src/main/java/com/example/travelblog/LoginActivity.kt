@@ -77,7 +77,6 @@ class LoginActivity : AppCompatActivity() {
 
     private fun performLogin() {
         preferences.setLoggedIn(true)
-        preferences.iAmTest()
         binding.loginButton.visibility = View.INVISIBLE
         binding.progressBar.visibility = View.VISIBLE
         binding.textUsernameLayout.isEnabled = false
