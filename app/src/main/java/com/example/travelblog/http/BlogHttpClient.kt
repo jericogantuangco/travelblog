@@ -10,9 +10,9 @@ import okhttp3.Response
 import java.util.concurrent.Executors
 
 object BlogHttpClient {
-    private const val BASE_URL = "https://bitbucket.org/dmytrodanylyk/travel-blog-resources/raw/"
 
-    private const val BLOG_ARTICLES_URL = BASE_URL + "8550ef2064bf14fcf3b9ff322287a2e056c7e153/blog_articles.json"
+    private const val BASE_URL = "https://bitbucket.org/dmytrodanylyk/travel-blog-resources/raw/"
+    private const val BLOG_ARTICLES_URL = BASE_URL + "647f4270e4271fbff28f1d80e2f2d12b3bd4a1cd/blog_articles.json"
 
     private val executor = Executors.newFixedThreadPool(4)
     private val client = OkHttpClient()
